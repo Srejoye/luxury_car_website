@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Our Collection </title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        *{margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; color: #fff;}
+        body{background: linear-gradient(135deg, #000000, #1a1a1a);}
+
+        /* Navbar Styles */
+        nav{position: fixed; width: 100%; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 25px 100px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 1000; transition: all 0.3s ease;}
+        nav.scrolled{background: rgba(0, 0, 0, 0.9); padding: 15px 100px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);}
+        nav:hover{box-shadow: 0 0 20px rgba(221, 36, 118, 0.4);}
+        .logo{font-size: 2.5em; font-weight: 800; background: linear-gradient(45deg, #ff0000, #cc0000); -webkit-background-clip: text; background-clip: text; color: transparent; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);}
+        .nav-links{display: flex; gap: 40px; list-style: none;}
+        .nav-links a{color: #fff; text-decoration: none; font-size: 1.4em; font-weight: 600; padding: 12px 25px; border-radius: 30px; transition: all 0.3s ease; letter-spacing: 1px; text-transform: uppercase;}
+        .nav-links a:hover{color: #fff; background: linear-gradient(45deg, #ff0000, #cc0000); transform: translateY(-3px);}
+        .nav-item{position: relative; text-decoration: none; font-size: 1.4em; font-weight: 600; padding: 12px 25px; border-radius: 30px; transition: all 0.3s ease; letter-spacing: 1px; text-transform: uppercase;}
+        .nav-item::before{content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 30px; background: linear-gradient(45deg, #ff0000, #cc0000); opacity: 0; z-index: -1; transition: all 0.3s ease;}
+        .nav-item:hover{color: #fff; transform: translateY(-3px); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);}
+        .nav-item:hover::before{opacity: 1;}
+        .nav-item.active{background: linear-gradient(45deg, #ff0000, #cc0000)}
+        .menu-icon{display: none; cursor: pointer; flex-direction: column; gap: 5px;}
+        .menu-icon .line{width: 25px; height: 3px; background-color: #fff; transition: all 0.3s ease;}
+        .menu-icon.active .line:nth-child(1){transform: rotate(45deg) translate(5px, 5px);}
+        .menu-icon.active .line:nth-child(2){opacity: 0;}
+        .menu-icon.active .line:nth-child(3){transform: rotate(-45deg) translate(5px, -5px);}
+        @media (max-width: 768px){
+            nav{padding: 20px 30px;}
+            .logo{font-size: 2em;}
+            .nav-links{display: none; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; flex-direction: column; align-items: center; gap: 20px;}
+            .nav-links.active{display: flex;}
+            .nav-item{font-size: 1.1em; padding: 10px 20px;}
+            .menu-icon{display: flex;}}
+
+        /* Header */
+        .collection-header{padding: 200px 50px 100px; text-align: center; background: url('https://21motoring.com/wp-content/uploads/2022/12/josh-altman-mclaren-p1-front-side-angle-2.webp') no-repeat center center; background-size: cover; background-attachment: fixed; position: relative;}
+        .collection-header::before{content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8);}
+        .header-content{position: relative; z-index: 1; max-width: 1200px; margin: 0 auto;}
+        .header-content h1{font-family: 'Orbitron', sans-serif; font-size: 4.5em; margin-bottom: 20px; background: linear-gradient(45deg, #ff0000, #ff6600); -webkit-background-clip: text; background-clip: text; color: transparent; text-transform: uppercase; letter-spacing: 4px; animation: titleGlow 2s ease-in-out infinite alternate;}
+        @keyframes titleGlow{from {text-shadow: 0 0 10px rgba(255,0,0,0.5);} to {text-shadow: 0 0 20px rgba(255,0,0,0.8);}}
+        .header-content p{font-family: 'Rajdhani', sans-serif; font-size: 1.8em; max-width: 800px; margin: 0 auto; line-height: 1.6;}
+
+        /* Filter Section */
+        .filter-section{padding: 40px 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);}
+        .filter-container{max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;}
+        .filter-btn{padding: 12px 25px; background: transparent; border: 2px solid #ff0000; border-radius: 30px; color: #fff; font-size: 1.1em; cursor: pointer; transition: all 0.3s ease;}
+        .filter-btn:hover, .filter-btn.active{background: linear-gradient(45deg, #ff0000, #ff6600); border-color: transparent; transform: translateY(-3px);}
+
+        /* Car Collection Grid */
+        .car-collection{display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; padding: 80px 20px; max-width: 1400px; margin: 0 auto;}
+        .car-card{position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);}
+        .car-card:hover{transform: translateY(-10px) scale(1.02); box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);}
+        .car-image{width: 100%; height: 300px; position: relative; overflow: hidden;}
+        .car-image img{width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;}
+        .car-card:hover .car-image img{transform: scale(1.1);}
+        .car-info{padding: 25px; position: relative;}
+        .car-info h3{font-family: 'Rajdhani', sans-serif; font-size: 1.8em; margin-bottom: 10px; color: #fff;}
+        .car-specs{display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0;}
+        .spec-item{display: flex; align-items: center; gap: 10px;}
+        .spec-item i{font-size: 1.2em; color: #ff0000;}
+        .car-btn{display: inline-block; padding: 12px 25px; background: linear-gradient(45deg, #ff0000, #ff6600); border-radius: 30px; text-decoration: none; color: #fff; font-weight: bold; transition: all 0.3s ease;}
+        .car-btn:hover{background: linear-gradient(45deg, #ff6600, #ff0000); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);}
+
+        /* Footer */
+        footer{background-color: #121212; color: #ffffff; padding: 40px 20px;}
+        .footer-container{display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: auto; gap: 20px; text-align: center;}
+        .footer-column{flex: 1; min-width: 200px;}
+        .footer-column h3{color: #b30000; font-size: 26px; margin-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        .footer-column p, .footer-column a{font-size: 20px; color: #ffffff; text-decoration: none; line-height: 1.5; font-family: 'Rajdhani', sans-serif;}
+        .footer-column a:hover{text-decoration: underline;}
+        .footer-divider{height: 1px; background-color: #333; margin: 20px 0;}
+        .footer-bottom{display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 20px; font-family: 'Rajdhani', sans-serif; font-size: 16px;}
+
+        /* Add 3D Social Icons styles */
+        .icons{display: flex; gap: 50px; margin-top: 20px;}
+        .icons a{position: relative; display: inline-block; width: 50px; height: 50px; background: #fff; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #333; font-size: 25px; transition: 0.5s; color: #333 !important;}
+        .icons a i{color: #333;}
+        .icons a:hover i{color: #fff;}
+        .icons a:hover{transform: rotate(-35deg) skew(20deg);}
+        .icons a::before{content: ''; position: absolute; top: 8px; left: -16px; height: 100%; width: 16px; background: #b1b1b1; transition: 0.5s; transform: skewY(-45deg);}
+        .icons a::after{content: ''; position: absolute; bottom: -16px; left: -8px; height: 16px; width: 100%; background: #b1b1b1; transition: 0.5s; transform: skewX(-45deg);}
+        .icons a:hover::before{background: #d35400;}
+        .icons a:hover::after{background: #e67e22;}
+        .icons a:hover{color: #fff;}
+        .icons a .fab{font-size: 25px; transition: 0.5s;}
+
+        .icons a.github:hover { background: #333333; }
+        .icons a.github:hover::before { background: #24292e; }
+        .icons a.github:hover::after { background: #444444; }
+
+        .icons a.twitter:hover { background: #1da1f2; }
+        .icons a.twitter:hover::before { background: #1a91da; }
+        .icons a.twitter:hover::after { background: #4db5f5; }
+
+        .icons a.linkedin:hover { background: #0077b5; }
+        .icons a.linkedin:hover::before { background: #006396; }
+        .icons a.linkedin:hover::after { background: #0a8cd2; }
+
+        /* BackToTop Button */
+        #backToTop{display: none; position: fixed; bottom: 20px; right: 30px; z-index: 99; border: none; outline: none; background-color: #ff0000; color: white; cursor: pointer; padding: 15px; border-radius: 50%; font-size: 18px; transition: background-color 0.3s;}
+        #backToTop:hover{background-color: #cc0000;}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            RIDE TECHS
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html" class="nav-item"> HOME </a></li>
+            <li><a href="collection.html" class="nav-item"> COLLECTION </a></li>
+            <li><a href="service.html" class="nav-item"> SERVICE </a></li>
+            <li><a href="about.html" class="nav-item"> ABOUT US </a></li>
+            <li><a href="contact.html" class="nav-item"> CONTACT </a></li>
+        </ul>
+        <div class="menu-icon">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+    <header class="collection-header">
+        <div class="header-content">
+            <h1> Explore Our Exclusive Collection </h1>
+            <p> Discover the finest luxury cars, handpicked for the discerning individual. </p>
+        </div>
+    </header>
+    <section class="filter-section">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all"> All </button>
+            <button class="filter-btn" data-filter="bentley"> Bentley </button>
+            <button class="filter-btn" data-filter="porsche"> Porsche </button>
+            <button class="filter-btn" data-filter="audi"> Audi </button>
+            <button class="filter-btn" data-filter="mercedes"> Mercedes </button>
+            <button class="filter-btn" data-filter="lamborghini"> Lamborghini </button>
+            <button class="filter-btn" data-filter="BMW"> BMW </button>
+            <button class="filter-btn" data-filter="land-rover"> Land Rover </button>
+            <button class="filter-btn" data-filter="ferrari"> Ferrari </button>
+        </div>
+    </section>
+
+    <main class="car-collection">
+        <div class="car-card" data-category="audi">
+            <div class="car-image">
+                <img src="https://static1.topspeedimages.com/wordpress/wp-content/uploads/2024/05/red-2020-audi-r8-v10-coupe-3.jpg" alt="Audi R8">
+            </div>
+            <div class="car-info">
+                <h3> Audi R8 </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.2s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 22mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 5.2L V10 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $169,900 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="bentley">
+            <div class="car-image">
+                <img src="https://res.cloudinary.com/mecum/image/upload/c_fill,f_auto,g_auto,q_auto,w_1920/v1659679361/auctions/sc20/sc0520-415070/1270151_12.jpg?" alt="Bentley Continental GT">
+            </div>
+            <div class="car-info">
+                <h3> Bentley Continental GT </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.6s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 20mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 6.0L W12 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $200,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="porsche">
+            <div class="car-image">
+                <img src="https://bringatrailer.com/wp-content/uploads/2019/05/2010_porsche_911_carrera_s_15617632276ad3ada2010_porsche_911_carrera_s_1561620823565ef66e7dff9f983f6cd7e0-c31f-4ea6-aa0d-9d5b44631008-lY9kbT-e1561763286427.jpg" alt="Porsche 911 Carrera">
+            </div>
+            <div class="car-info">
+                <h3> Porsche 911 Carrera </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.5s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 22mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L flat-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $97,400 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="porsche">
+            <div class="car-image">
+                <img src="https://th.bing.com/th/id/R.3f6e13c0c93f626f9abb16aa9094a0f7?rik=2pHnJ2sDOscNuA&riu=http%3a%2f%2fresources.carsguide.com.au%2fstyles%2fcg_hero_low%2fs3%2fporsche-cayenne-s-diesel-2015-(1).jpg%3ftimestamp%3d1411017213&ehk=BAa1Fv5%2bhXHZsMz%2fty8QFTbGj%2b%2bvKoPf9x%2bOCat841U%3d&risl=&pid=ImgRaw&r=0" alt="Porsche Cayenne">
+            </div>
+            <div class="car-info">
+                <h3> Porsche Cayenne </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.7s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 21mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.6L V6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $67,500 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="bentley">
+            <div class="car-image">
+                <img src="https://www.motoringresearch.com/wp-content/uploads/2016/01/14_Bentley_Bentayga_2016_blue.jpg" alt="Bentley Bentayga">
+            </div>
+            <div class="car-info">
+                <h3> Bentley Bentayga </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 4.4s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 15mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 4.0L V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $166,425 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="bentley">
+            <div class="car-image">
+                <img src="https://media.evo.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1611699252/evo/2021/01/Bentley%20Flying%20Spur%20V8%202021-19.jpg" alt="Bentley Flying Spur">
+            </div>
+            <div class="car-info">
+                <h3> Bentley Flying Spur </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 4.3s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 19mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 4.0L V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $196,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="porsche">
+            <div class="car-image">
+                <img src="https://static1.topspeedimages.com/wordpress/wp-content/uploads/jpg/201707/porsche-911-turbo-s--29.jpg" alt="Porsche 911 Turbo S3.8">
+            </div>
+            <div class="car-info">
+                <h3> Porsche 911 Turbo S3.8 </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 2.6s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 20mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.8L twin-turbo flat-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $207,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="bentley">
+            <div class="car-image">
+                <img src="https://car-images.bauersecure.com/pagefiles/26615/bentley-012.jpg" alt="Bentley Mulsanne">
+            </div>
+            <div class="car-info">
+                <h3> Bentley Mulsanne </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 5.1s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 12mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 6.75L V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $310,800 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="audi">
+            <div class="car-image">
+                <img src="https://www.hdcarwallpapers.com/walls/audi_rs_7_sportback_2020_5k_4-HD.jpg" alt="Audi RS7 Sportback">
+            </div>
+            <div class="car-info">
+                <h3> Audi RS7 Sportback </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.5s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 18mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 4.0L twin-turbo V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $122,900 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="audi">
+            <div class="car-image">
+                <img src="https://cdn.jdpower.com/JDP_2024%20Audi%20Q8%20Sportback%2055%20E-tron%20Quattro%20Front%20Quarter%20View%20European%20Model.jpg" alt="Audi Q8 e-tron">
+            </div>
+            <div class="car-info">
+                <h3> Audi Q8 e-tron </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 5.5s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-bolt"></i>
+                        <span> 204 miles range </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> Electric motor </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $74,400 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="porsche">
+            <div class="car-image">
+                <img src="https://s1.cdn.autoevolution.com/images/gallery/PORSCHE-Panamera-Turbo-5724_22.jpg" alt="Porsche Panamera">
+            </div>
+            <div class="car-info">
+                <h3> Porsche Panamera </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 4.1s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 24mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 2.9L V6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $89,800 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="audi">
+            <div class="car-image">
+                <img src="https://www.supercars.net/blog/wp-content/uploads/2020/10/Audi-A8-L-30-TFSI-quattro-2018-3840x2160-012-scaled.jpg" alt="Audi A8 L">
+            </div>
+            <div class="car-info">
+                <h3> Audi A8 L </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 5.6s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 22mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L turbo V6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $89,500 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="mercedes">
+            <div class="car-image">
+                <img src="https://www.marinoperformancemotors.com/imagetag/12839/6/l/Used-2017-Mercedes-Benz-S-Class-S-550.jpg" alt="Mercedes-Benz S-Class">
+            </div>
+            <div class="car-info">
+                <h3> Mercedes-Benz S-Class </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 4.5s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 22mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L inline-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $111,100 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="mercedes">
+            <div class="car-image">
+                <img src="https://i.pinimg.com/736x/ef/16/65/ef1665027a317f3037f43a8ea0ad3f80.jpg" alt="Mercedes-AMG GT">
+            </div>
+            <div class="car-info">
+                <h3> Mercedes-AMG GT </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.6s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 19mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 4.0L V8 twin-turbo engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $133,400 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="mercedes">
+            <div class="car-image">
+                <img src="https://cdn.carshowroom.com.au/media/21503232/news-2019-mercedes-benz-e-class-gallery-01-0918.jpg" alt="Mercedes-Benz E-Class">
+            </div>
+            <div class="car-info">
+                <h3> Mercedes-Benz E-Class </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 5.3s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 28mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 2.0L inline-4 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $57,500 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="lamborghini">
+            <div class="car-image">
+                <img src="https://wallpapercave.com/wp/wp4148954.jpg" alt="Lamborghini Aventador">
+            </div>
+            <div class="car-info">
+                <h3> Lamborghini Aventador </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 2.9s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 10mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 6.5L V12 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $421,321 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="lamborghini">
+            <div class="car-image">
+                <img src="https://wallpapercave.com/wp/wp4777857.jpg" alt="Lamborghini Huracán EVO">
+            </div>
+            <div class="car-info">
+                <h3> Lamborghini Huracán EVO </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 2.5s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 15mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 5.2L V10 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $261,274 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="lamborghini">
+            <div class="car-image">
+                <img src="https://i.ytimg.com/vi/7asb8o9lezE/maxresdefault.jpg" alt="Lamborghini Urus">
+            </div>
+            <div class="car-info">
+                <h3> Lamborghini Urus </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.6s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 14mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 4.0L twin-turbo V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $225,500 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="lamborghini">
+            <div class="car-image">
+                <img src="https://www.exoticauto.com/wp-content/uploads/Lamborghini_Sian.jpg" alt="Lamborghini Sián FKP 37">
+            </div>
+            <div class="car-info">
+                <h3> Lamborghini Sián FKP 37 </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 2.8s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 19mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 6.5L V12 hybrid engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $3.6 million </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+
+        <div class="car-card" data-category="BMW">
+            <div class="car-image">
+                <img src="https://wallup.net/wp-content/uploads/2017/03/28/413172-BMW_M4_Coupe-BMW_F82_M4-car-BMW.jpg" alt="BMW M4 Coupe">
+            </div>
+            <div class="car-info">
+                <h3> BMW M4 Coupe </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 4.1s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 22mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L inline-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $72,800 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="BMW">
+            <div class="car-image">
+                <img src="https://media.autoexpress.co.uk/image/private/s--CO2gL5rB--/v1563183731/autoexpress/2018/12/bmw-x5-12.jpg" alt="BMW X5">
+            </div>
+            <div class="car-info">
+                <h3> BMW X5 </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 5.3s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 24mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L inline-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $61,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+                    
+        <div class="car-card" data-category="BMW">
+            <div class="car-image">
+                <img src="https://media.drivingelectric.com/image/private/s--M0DC7nyG--/v1597781544/drivingelectric/2019-06/3-bmw-7-series-hybrid.jpg" alt="BMW 7 series">
+            </div>
+            <div class="car-info">
+                <h3> BMW 7 series </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.6s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 21mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 4.4L V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $94,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="BMW">
+            <div class="car-image">
+                <img src="https://s1.cdn.autoevolution.com/images/news/gallery/2020-bmw-z4-roadster-shows-stunning-details-in-new-photo-shoot_82.jpg" alt="BMW Z4 Roadster">
+            </div>
+            <div class="car-info">
+                <h3> BMW Z4 Roadster </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 4.4s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 26mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L inline-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $50,700 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="land-rover">
+            <div class="car-image">
+                <img src="https://www.topgear.com/sites/default/files/cars-car/carousel/2018/03/rr_swb_phev_006.jpg" alt="Range Rover">
+            </div>
+            <div class="car-info">
+                <h3> Range Rover </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 5.1s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 20mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L inline-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $104,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="land-rover">
+            <div class="car-image">
+                <img src="https://cdn.content.motors.co.uk/resize/1500/2021/01/Land-Rover-Discovery-Front.jpg" alt="Land Rover Discovery">
+            </div>
+            <div class="car-info">
+                <h3> Land Rover Discovery </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 6.9s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 21mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.0L inline-6 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $58,600 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="land-rover">
+            <div class="car-image">
+                <img src="https://media.autoexpress.co.uk/image/private/s--B5u7ujdX--/t_content-image-full-desktop@2/v1562248455/autoexpress/6/30/landrover-fd-040_0.jpg" alt="Land Rover Defender">
+            </div>
+            <div class="car-info">
+                <h3> Land Rover Defender </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 4.9s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 18mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 2.0L inline-4 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $52,300 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="land-rover">
+            <div class="car-image">
+                <img src="https://media.autoexpress.co.uk/image/private/s--W4pRjub7--/v1575996490/autoexpress/2019/12/01_0.jpg" alt="Range Rover Velar">
+            </div>
+            <div class="car-info">
+                <h3> Range Rover Velar </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 5.8s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 24mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 2.0L inline-4 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $58,300 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="ferrari">
+            <div class="car-image">
+                <img src="https://i.pinimg.com/736x/02/2b/62/022b62049f7aadb02c729ff740ba1019.jpg" alt="Ferrari 488 GTB">
+            </div>
+            <div class="car-info">
+                <h3> Ferrari 488 GTB </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.0s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 24mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.9L V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $250,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="ferrari">
+            <div class="car-image">
+                <img src="https://www.supercars.net/blog/wp-content/uploads/2020/07/2020-Ferrari-F8-Spider-010-1600.jpg" alt="Ferrari F8 TRIBUTO">
+            </div>
+            <div class="car-info">
+                <h3> Ferrari F8 Tributo </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 2.9s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 21mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.9L V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $276,550 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="ferrari">
+            <div class="car-image">
+                <img src="https://images.pistonheads.com/nimg/44056/roma5.jpg" alt="Ferrari Roma">
+            </div>
+            <div class="car-info">
+                <h3> Ferrari Roma </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 3.4s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 23mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 3.9L V8 engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $222,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+        
+        <div class="car-card" data-category="ferrari">
+            <div class="car-image">
+                <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2021-ferrari-sf90-stradale-129-1593128803.jpg?crop=1.00xw:0.752xh;0,0.108xh&resize=1200:*" alt="Ferrari SF90 Stradale">
+            </div>
+            <div class="car-info">
+                <h3> Ferrari SF90 Stradale </h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span> 0-60mph in 2.5s </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-gas-pump"></i>
+                        <span> 25mpg combined </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-cog"></i>
+                        <span> 4.0L V8 hybrid engine </span>
+                    </div>
+                    <div class="spec-item">
+                        <i class="fas fa-euro-sign"></i>
+                        <span> Starting at $625,000 </span>
+                    </div>
+                </div>
+                <a href="#" class="car-btn"> Learn More </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3> Contact </h3>
+                <p> C/38, Sector 20, Near Camp Office, <br> Noida, Uttar Pradesh, <br> India - 201301 </p>
+                <p> Email: info@ridetech.com </p>
+                <p> Phone: +91 46393-36283 </p>
+            </div>
+
+            <div class="footer-column">
+                <h3> Showroom </h3>
+                <p> Monday to Friday: <br> 09:00 - 18:00 </p>
+                <p> Saturday: <br> 10:00 - 17:00 </p>
+            </div>
+
+            <div class="footer-column">
+                <h3> Service & Warehouse </h3>
+                <p> Monday to Friday: <br> 08:00 - 17:00 </p>
+                <p> Saturday: <br> Closed </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Site</h3>
+                <p><a href="home.html"> Home </a></p>
+                <p><a href="collection.html"> Collection </a></p>
+                <p><a href="service.html"> Service </a></p>
+                <p><a href="about.html"> About us </a></p>
+                <p><a href="contact.html"> Contact </a></p>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <p> © 2024 Ride Tech | All rights reserved </p>
+            <div class="icons">
+                <a href="https://x.com/srejoye" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/Srejoye" class="github"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/srejoye-saha" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" title="Go to top"> ↑ </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const carCards = document.querySelectorAll('.car-card');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    carCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("backToTop").style.display = "block";
+            } else {
+                document.getElementById("backToTop").style.display = "none";
+            }
+        }
+        document.getElementById("backToTop").onclick = function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+    </script>
+</body>
+</html>

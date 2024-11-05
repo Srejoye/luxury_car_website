@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        *{margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif;}
+        body{background: #000; color: #fff;}
+
+        /* Navbar Styles */
+        nav{position: fixed; width: 100%; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 25px 100px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 1000; transition: all 0.3s ease;}
+        nav.scrolled{background: rgba(0, 0, 0, 0.9); padding: 15px 100px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);}
+        nav:hover{box-shadow: 0 0 20px rgba(221, 36, 118, 0.4);}
+        .logo{font-size: 2.5em; font-weight: 800; background: linear-gradient(45deg, #ff0000, #cc0000); -webkit-background-clip: text; background-clip: text; color: transparent; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);}
+        .nav-links{display: flex; gap: 40px; list-style: none;}
+        .nav-links a{color: #fff; text-decoration: none; font-size: 1.4em; font-weight: 600; padding: 12px 25px; border-radius: 30px; transition: all 0.3s ease; letter-spacing: 1px; text-transform: uppercase;}
+        .nav-links a:hover{color: #fff; background: linear-gradient(45deg, #ff0000, #cc0000); transform: translateY(-3px);}
+        .nav-item{position: relative; text-decoration: none; font-size: 1.4em; font-weight: 600; padding: 12px 25px; border-radius: 30px; transition: all 0.3s ease; letter-spacing: 1px; text-transform: uppercase;}
+        .nav-item::before{content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 30px; background: linear-gradient(45deg, #ff0000, #cc0000); opacity: 0; z-index: -1; transition: all 0.3s ease;}
+        .nav-item:hover{color: #fff; transform: translateY(-3px); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);}
+        .nav-item:hover::before{opacity: 1;}
+        .nav-item.active{background: linear-gradient(45deg, #ff0000, #cc0000)}
+        .menu-icon{display: none; cursor: pointer; flex-direction: column; gap: 5px;}
+        .menu-icon .line{width: 25px; height: 3px; background-color: #fff; transition: all 0.3s ease;}
+        .menu-icon.active .line:nth-child(1){transform: rotate(45deg) translate(5px, 5px);}
+        .menu-icon.active .line:nth-child(2){opacity: 0;}
+        .menu-icon.active .line:nth-child(3){transform: rotate(-45deg) translate(5px, -5px);}
+        @media (max-width: 768px){
+            nav{padding: 20px 30px;}
+            .logo{font-size: 2em;}
+            .nav-links{display: none; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; flex-direction: column; align-items: center; gap: 20px;}
+            .nav-links.active{display: flex;}
+            .nav-item{font-size: 1.1em; padding: 10px 20px;}
+            .menu-icon{display: flex;}}
+
+        /* Services Section */
+        .services-container{max-width: 100%; margin: 0 auto; margin-top: 80px; padding: 50px 20px; background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center; background-attachment: fixed; position: relative;}
+        .services-container::before{content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1;}
+        .premium-header, .services-grid, .contact-button-container{position: relative; z-index: 2;}
+        .services-grid{display: grid; grid-template-columns: repeat(auto-fit, minmax(600px, 3fr)); gap: 30px; margin-top: 50px;}
+        .service-card{background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 30px; text-align: center; transition: transform 0.3s ease; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); position: relative; z-index: 2;}
+        .service-card:hover{transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3); background: rgba(255, 255, 255, 0.15);}
+        .service-icon{font-size: 3em; color: #ff0000; margin-bottom: 20px;}
+        .service-card h3{color: gray; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); margin-bottom: 5px; font-family: 'Rajdhani', 'sans-serif'; font-size: 25px;}
+        .service-card p{color: #f0f0f0; font-family: 'Rajdhani', 'sans-serif'; font-size: 30px;}
+
+        /* Premium Services Section */
+        .premium-services{background: linear-gradient(45deg, #000000, #1a1a1a); padding: 80px 0; margin-top: 50px;}
+        .premium-container{max-width: 1200px; margin: 0 auto; padding: 0 20px;}
+        .premium-header{text-align: center; margin-bottom: 50px; font-size: 22px;}
+        .premium-header h2{font-family: 'Orbitron', sans-serif; font-size: 2.5em; background: linear-gradient(45deg, #ff0000, #ff6600); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 20px;}
+        .premium-header p{font-size: 1.2em; font-family: 'Rajdhani', 'sans-serif';}
+        .premium-grid{display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;}
+        .premium-card{background: rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; text-align: center; transition: all 0.3s ease;}
+        .premium-card:hover{transform: translateY(-10px); box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);}
+        .premium-icon{font-size: 3.5em; color: #ff0000; margin-bottom: 25px;}
+        .premium-card h3{font-family: 'Orbitron', sans-serif; font-size: 2em; color: #fff; margin-bottom: 20px;}
+        .premium-card p{font-family: 'Rajdhani', sans-serif; font-size: 1.8em; color: #ccc; line-height: 1.6; margin-bottom: 25px;}
+
+        /* Contact Button */
+        .contact-button-container{text-align: center; margin-top: 50px;}
+        .contact-button{display: inline-block; padding: 15px 40px; font-size: 1.2em; font-family: 'Orbitron', sans-serif; text-decoration: none; color: #fff; background: linear-gradient(45deg, #ff0000, #ff6600); border-radius: 50px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);}
+        .contact-button:hover{transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 0, 0, 0.5);}
+        .contact-button i{margin-left: 10px;}
+
+        /* Service Process Timeline */
+        .process-section{padding: 100px 0; background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center; background-attachment: fixed; position: relative; overflow: hidden;}
+        .process-section::before{content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 1;}
+        .process-container{max-width: 100%; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;}
+        .process-header{text-align: center; margin-bottom: 60px;}
+        .process-header h2{font-family: 'Orbitron', sans-serif; font-size: 2.8em; background: linear-gradient(45deg, #ff0000, #ff6600); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 20px;}
+        .process-header p{color: #fff; font-size: 1.8em; font-family: 'Rajdhani', sans-serif;}
+        .timeline{display: flex; justify-content: space-between; align-items: flex-start; position: relative; padding: 20px 0;}
+        .timeline::before{content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(to right, #ff0000, #ff6600); z-index: 1;}
+        .timeline-item{flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; padding: 0 10px;}
+        .timeline-icon{width: 60px; height: 60px; background: linear-gradient(45deg, #ff0000, #ff6600); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);}
+        .timeline-icon i{color: white; font-size: 24px;}
+        .timeline-content{text-align: center; background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s ease;}
+        .timeline-content:hover{transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);}
+        .timeline-content h3{color: #ff6600; font-family: 'Orbitron', sans-serif; margin-bottom: 10px; font-size: 1.6em;}
+        .timeline-content p{color: #fff; font-family: 'Rajdhani', sans-serif; font-size: 1.3em; line-height: 1.4;}
+        @media (max-width: 768px){.timeline{flex-direction: column; align-items: center;} .timeline::before{display: none;} .timeline-item{margin-bottom: 30px;} .timeline-content{width: 100%;}}
+
+        /* Footer */
+        footer{background-color: #121212; color: #ffffff; padding: 40px 20px;}
+        .footer-container{display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: auto; gap: 20px; text-align: center;}
+        .footer-column{flex: 1; min-width: 200px;}
+        .footer-column h3{color: #b30000; font-size: 26px; margin-bottom: 10px; font-family: 'Orbitron', sans-serif;}
+        .footer-column p, .footer-column a{font-size: 20px; color: #ffffff; text-decoration: none; line-height: 1.5; font-family: 'Rajdhani', sans-serif;}
+        .footer-column a:hover{text-decoration: underline;}
+        .footer-divider{height: 1px; background-color: #333; margin: 20px 0;}
+        .footer-bottom{display: flex; flex-direction: column; align-items: center; text-align: center; margin-top: 20px; font-family: 'Rajdhani', sans-serif; font-size: 16px;}
+
+        /* Add 3D Social Icons styles */
+        .icons{display: flex; gap: 50px; margin-top: 20px;}
+        .icons a{position: relative; display: inline-block; width: 50px; height: 50px; background: #fff; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-decoration: none; color: #333; font-size: 25px; transition: 0.5s; color: #333 !important;}
+        .icons a i{color: #333;}
+        .icons a:hover i{color: #fff;}
+        .icons a:hover{transform: rotate(-35deg) skew(20deg);}
+        .icons a::before{content: ''; position: absolute; top: 8px; left: -16px; height: 100%; width: 16px; background: #b1b1b1; transition: 0.5s; transform: skewY(-45deg);}
+        .icons a::after{content: ''; position: absolute; bottom: -16px; left: -8px; height: 16px; width: 100%; background: #b1b1b1; transition: 0.5s; transform: skewX(-45deg);}
+        .icons a:hover::before{background: #d35400;}
+        .icons a:hover::after{background: #e67e22;}
+        .icons a:hover{color: #fff;}
+        .icons a .fab{font-size: 25px; transition: 0.5s;}
+
+        .icons a.github:hover { background: #333333; }
+        .icons a.github:hover::before { background: #24292e; }
+        .icons a.github:hover::after { background: #444444; }
+
+        .icons a.twitter:hover { background: #1da1f2; }
+        .icons a.twitter:hover::before { background: #1a91da; }
+        .icons a.twitter:hover::after { background: #4db5f5; }
+
+        .icons a.linkedin:hover { background: #0077b5; }
+        .icons a.linkedin:hover::before { background: #006396; }
+        .icons a.linkedin:hover::after { background: #0a8cd2; }
+
+        /* BackToTop Button */
+        #backToTop{display: none; position: fixed; bottom: 20px; right: 30px; z-index: 99; border: none; outline: none; background-color: #ff0000; color: white; cursor: pointer; padding: 15px; border-radius: 50%; font-size: 18px; transition: background-color 0.3s;}
+        #backToTop:hover{background-color: #cc0000;}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            RIDE TECHS
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html" class="nav-item"> HOME </a></li>
+            <li><a href="collection.html" class="nav-item"> COLLECTION </a></li>
+            <li><a href="service.html" class="nav-item"> SERVICE </a></li>
+            <li><a href="about.html" class="nav-item"> ABOUT US </a></li>
+            <li><a href="contact.html" class="nav-item"> CONTACT </a></li>
+        </ul>
+        <div class="menu-icon">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </nav>
+
+    <section class="services-container">
+        <div class="premium-header">
+            <h2> Our Services </h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-car service-icon"></i>
+                <h3> VEHICLE SALES </h3>
+                <p> Explore our collection of luxury cars, tailored to your unique preferences </p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-cog service-icon"></i>
+                <h3> CUSTOM ORDERS </h3>
+                <p> Design your dream car with our expert customization services </p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-chart-line service-icon"></i>
+                <h3> FINANCING </h3>
+                <p> Get expert financing advice and tailored solutions for your luxury car purchase </p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-road service-icon"></i>
+                <h3> TEST DRIVES </h3>
+                <p> Experience the thrill of driving a luxury car with our exclusive test drive services </p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-wrench service-icon"></i>
+                <h3> MAINTENANCE AND REPAIRS </h3>
+                <p> Trust our expert technicians to keep your luxury car in pristine condition </p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-spray-can service-icon"></i>
+                <h3> DETAILING </h3>
+                <p> Get your luxury car looking like new with our premium detailing services </p>
+            </div>
+        </div>
+        <div class="contact-button-container">
+            <a href="contact.html" class="contact-button"> Contact Now <i class="fas fa-arrow-right"></i> </a>
+        </div>
+    </section>
+
+    <section class="premium-services">
+        <div class="premium-container">
+            <div class="premium-header">
+                <h2> Premium Services </h2>
+                <p> Experience the ultimate in luxury car ownership with our premium services </p>
+            </div>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <i class="fas fa-lock premium-icon"></i>
+                    <h3> Vehicle Storage </h3>
+                    <p> Secure, climate-controlled storage for your luxury car </p>
+                </div>
+                <div class="premium-card">
+                    <i class="fas fa-truck premium-icon"></i>
+                    <h3> Vehicle Transport </h3>
+                    <p> Reliable, door-to-door transportation for your luxury car </p>
+                </div>
+                <div class="premium-card">
+                    <i class="fas fa-headset premium-icon"></i>
+                    <h3> Technology Support </h3>
+                    <p> Expert assistance with in-car technology and systems </p>
+                </div>
+            </div>
+        </div>
+        <div class="contact-button-container">
+            <a href="contact.html" class="contact-button"> Contact Now <i class="fas fa-arrow-right"></i> </a>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="process-container">
+            <div class="process-header">
+                <h2> Our Service Process </h2>
+                <p> Seamless luxury car service journey </p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3> 1. Schedule </h3>
+                        <p> Book your service online or call our dedicated line </p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3> 2. Check-In </h3>
+                        <p> Comprehensive initial inspection of your vehicle </p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3> 3. Service </h3>
+                        <p> Skilled technicians perform requested services </p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3> 4. Quality Check </h3>
+                        <p> Rigorous quality checks ensure premium standards </p>
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3> 5. Delivery </h3>
+                        <p> Vehicle returned in pristine condition </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3> Contact </h3>
+                <p> C/38, Sector 20, Near Camp Office, <br> Noida, Uttar Pradesh, <br> India - 201301 </p>
+                <p> Email: info@ridetech.com </p>
+                <p> Phone: +91 46393-36283 </p>
+            </div>
+
+            <div class="footer-column">
+                <h3> Showroom </h3>
+                <p> Monday to Friday: <br> 09:00 - 18:00 </p>
+                <p> Saturday: <br> 10:00 - 17:00 </p>
+            </div>
+
+            <div class="footer-column">
+                <h3> Service & Warehouse </h3>
+                <p> Monday to Friday: <br> 08:00 - 17:00 </p>
+                <p> Saturday: <br> Closed </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Site</h3>
+                <p><a href="home.html"> Home </a></p>
+                <p><a href="collection.html"> Collection </a></p>
+                <p><a href="service.html"> Service </a></p>
+                <p><a href="about.html"> About us </a></p>
+                <p><a href="contact.html"> Contact </a></p>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <p> © 2024 Ride Tech | All rights reserved </p>
+            <div class="icons">
+                <a href="https://x.com/srejoye" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/Srejoye" class="github"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/srejoye-saha" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" title="Go to top"> ↑ </button>
+
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js"></script>
+    <script>
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("backToTop").style.display = "block";
+            } else {
+                document.getElementById("backToTop").style.display = "none";
+            }
+        }
+
+        document.getElementById("backToTop").onclick = function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+    </script>
+</body>
+</html>
